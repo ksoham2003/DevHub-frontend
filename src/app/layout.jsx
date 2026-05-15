@@ -2,12 +2,10 @@ import './globals.css';
 import { AuthProvider } from '@/context/AuthContext';
 import Navbar from '@/components/layout/Navbar';
 import { Toaster } from 'react-hot-toast';
-
 export const metadata = {
   title: 'DevHub Terminal — Developer Community Platform',
   description: 'Build, share, and connect. A terminal-aesthetic community platform for developers.',
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -31,7 +29,7 @@ export default function RootLayout({ children }) {
               error:   { iconTheme: { primary: '#ff0040', secondary: '#000' }, style: { borderColor: '#ff0040', color: '#ff0040' } },
             }}
           />
-          <main className="min-h-screen pb-16">
+          <main className="min-h-screen pb-24">
             {children}
           </main>
           <Navbar />

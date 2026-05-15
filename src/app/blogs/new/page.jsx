@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -8,11 +7,7 @@ import Markdown from 'react-markdown';
 import toast from 'react-hot-toast';
 import TerminalBox from '@/components/ui/TerminalBox';
 import TagInput from '@/components/ui/TagInput';
-
 const CATEGORIES = ['Tutorial','Guide','Opinion','News','Project Update','Career','Other'];
-
-// Shared blog form — works for both /blogs/new and /blogs/[slug]/edit
-// When used as edit: pass editId prop (the blog _id)
 export function BlogFormView({ editId }) {
   const router    = useRouter();
   const { user }  = useAuth();
@@ -22,10 +17,8 @@ export function BlogFormView({ editId }) {
   const [form, setForm] = useState({
     title: '', content: '', excerpt: '', coverImage: '', tags: [], category: 'Other', published: true,
   });
-
   useEffect(() => {
     if (!user) { router.push('/login'); return; }
-    // If editing, load existing blog data
     if (isEdit) {
       import('@/lib/api').then(({ default: API }) =>
         API.get(`/blogs/edit/${editId}`)
@@ -37,7 +30,6 @@ export function BlogFormView({ editId }) {
       );
     }
   }, [user, editId]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -57,10 +49,8 @@ export function BlogFormView({ editId }) {
       setLoading(false);
     }
   };
-
   const addTag    = (t) => setForm({ ...form, tags: [...form.tags, t] });
   const removeTag = (t) => setForm({ ...form, tags: form.tags.filter((x) => x !== t) });
-
   return (
     <div className="pb-12 px-6">
       <div className="max-w-4xl mx-auto fade-in">
@@ -69,7 +59,6 @@ export function BlogFormView({ editId }) {
             <span className="text-[#00ff41]">root@devhub</span>:~$ cd ..
           </button>
         </div>
-
         <div className="border border-[#003d10]">
           <div className="flex items-center justify-between px-4 py-2 border-b border-[#003d10] text-xs text-[#005a14]">
             <div className="flex items-center gap-2">
@@ -86,7 +75,6 @@ export function BlogFormView({ editId }) {
               <span className="text-[#003d10]">[─][□][×]</span>
             </div>
           </div>
-
           <div className="p-10">
             {preview ? (
               <div className="fade-in">
@@ -108,7 +96,6 @@ export function BlogFormView({ editId }) {
                   <label className="block text-sm text-[#005a14] mb-2">{'>'} EXCERPT:</label>
                   <textarea value={form.excerpt} onChange={(e) => setForm({ ...form, excerpt: e.target.value })} rows={2} placeholder="brief summary" className="w-full resize-none" />
                 </div>
-
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm text-[#005a14] mb-2">{'>'} CATEGORY:</label>
@@ -121,14 +108,11 @@ export function BlogFormView({ editId }) {
                     <input type="url" value={form.coverImage} onChange={(e) => setForm({ ...form, coverImage: e.target.value })} placeholder="https://..." className="w-full" />
                   </div>
                 </div>
-
                 <TagInput label="TAGS" tags={form.tags} onAdd={addTag} onRemove={removeTag} placeholder="e.g. JavaScript" />
-
                 <div className="flex items-center gap-3">
                   <input type="checkbox" checked={form.published} onChange={(e) => setForm({ ...form, published: e.target.checked })} id="pub" />
                   <label htmlFor="pub" className="text-sm text-[#005a14] cursor-pointer">publish immediately</label>
                 </div>
-
                 <button type="submit" disabled={loading}
                   className="w-full py-3 border border-[#00ff41] text-[#00ff41] text-sm font-bold hover:bg-[#00ff41] hover:text-black transition-all disabled:opacity-30">
                   {loading ? '> SAVING...' : isEdit ? '> :wq (save & quit)' : form.published ? '> PUBLISH' : '> SAVE DRAFT'}
@@ -141,8 +125,6 @@ export function BlogFormView({ editId }) {
     </div>
   );
 }
-
-// /blogs/new
 export default function BlogNewPage() {
   return <BlogFormView editId={null} />;
 }

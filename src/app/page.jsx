@@ -1,11 +1,9 @@
 'use client';
-
 import Link from 'next/link';
 import { useTrending } from '@/hooks/useTrending';
 import ProjectCard from '@/components/cards/ProjectCard';
 import BlogCard from '@/components/cards/BlogCard';
 import DeveloperCard from '@/components/cards/DeveloperCard';
-
 const ASCII_LOGO = `
  ██████╗ ███████╗██╗   ██╗██╗  ██╗██╗   ██╗██████╗ 
  ██╔══██╗██╔════╝██║   ██║██║  ██║██║   ██║██╔══██╗
@@ -13,24 +11,19 @@ const ASCII_LOGO = `
  ██║  ██║██╔══╝  ╚██╗ ██╔╝██╔══██║██║   ██║██╔══██╗
  ██████╔╝███████╗ ╚████╔╝ ██║  ██║╚██████╔╝██████╔╝
  ╚═════╝ ╚══════╝  ╚═══╝  ╚═╝  ╚═╝ ╚═════╝ ╚═════╝`;
-
 export default function HomePage() {
   const { trending, loading } = useTrending();
-
   return (
     <div className="pb-12 px-6">
-      {/* ═══ HERO ═══ */}
       <section className="py-10 max-w-6xl mx-auto">
         <pre className="text-[#00ff41] text-xs sm:text-sm leading-tight font-bold whitespace-pre overflow-x-auto mb-6">
           {ASCII_LOGO}
         </pre>
-
         <div className="text-sm mb-2">
           <span className="text-[#00ff41]">root@devhub</span>
           <span className="text-[#005a14]">:~$ </span>
           <span className="text-[#00cc33]">cat /etc/motd</span>
         </div>
-
         <div className="pl-4 mb-6 text-[#00cc33] space-y-1">
           <p>Welcome to <span className="text-[#00ff41] font-bold">DevHub Terminal</span> — The Developer Community Platform</p>
           <p className="text-[#005a14]">────────────────────────────────────────────────────────</p>
@@ -38,7 +31,6 @@ export default function HomePage() {
           <p>SHARE.   Publish technical articles with full markdown support.</p>
           <p>CONNECT. Network with developers, follow, and build your community.</p>
         </div>
-
         <div className="mb-6">
           <div className="text-sm mb-3">
             <span className="text-[#00ff41]">root@devhub</span>
@@ -54,8 +46,6 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-
-        {/* Stats */}
         <div className="border border-[#003d10] flex divide-x divide-[#003d10] text-center max-w-lg">
           {[
             { val: trending.projects?.length || '0',   label: 'PROJECTS'  },
@@ -69,8 +59,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      {/* ═══ FEATURES ═══ */}
       <section className="max-w-6xl mx-auto mb-12">
         <div className="text-sm text-[#005a14] mb-4">
           <span className="text-[#00ff41]">root@devhub</span>:~$ cat /etc/features.conf
@@ -89,8 +77,6 @@ export default function HomePage() {
           ))}
         </div>
       </section>
-
-      {/* ═══ TRENDING PROJECTS ═══ */}
       {!loading && trending.projects?.length > 0 && (
         <section className="max-w-6xl mx-auto mb-12">
           <div className="flex items-center justify-between mb-4">
@@ -104,8 +90,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      {/* ═══ TRENDING BLOGS ═══ */}
       {!loading && trending.blogs?.length > 0 && (
         <section className="max-w-6xl mx-auto mb-12">
           <div className="flex items-center justify-between mb-4">
@@ -119,8 +103,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      {/* ═══ TOP DEVELOPERS ═══ */}
       {!loading && trending.developers?.length > 0 && (
         <section className="max-w-6xl mx-auto mb-12">
           <div className="flex items-center justify-between mb-4">
@@ -134,8 +116,6 @@ export default function HomePage() {
           </div>
         </section>
       )}
-
-      {/* ═══ CTA ═══ */}
       <section className="max-w-6xl mx-auto mb-12">
         <div className="border border-[#00ff41] p-10 text-center" style={{ boxShadow: '0 0 20px rgba(0,255,65,0.08)' }}>
           <p className="text-lg font-bold text-[#00ff41] mb-3">Ready to deploy your portfolio?</p>
@@ -145,7 +125,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-
       <div className="text-center text-sm text-[#003d10] pb-8">
         <span className="cursor-blink">DevHub Terminal v2.0.0 — Next.js Edition</span>
       </div>

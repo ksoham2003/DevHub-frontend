@@ -1,14 +1,7 @@
 'use client';
-
 import { useState } from 'react';
-
-/**
- * TagInput — reusable tag/skill chip input
- * Props: tags (string[]), onAdd, onRemove, placeholder
- */
 export default function TagInput({ tags = [], onAdd, onRemove, placeholder = 'e.g. React', label = 'TAGS' }) {
   const [input, setInput] = useState('');
-
   const handleAdd = () => {
     const val = input.trim();
     if (val && !tags.includes(val)) {
@@ -16,7 +9,6 @@ export default function TagInput({ tags = [], onAdd, onRemove, placeholder = 'e.
       setInput('');
     }
   };
-
   return (
     <div>
       <label className="block text-sm text-[#005a14] mb-2">

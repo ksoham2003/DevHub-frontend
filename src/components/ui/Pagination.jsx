@@ -1,9 +1,4 @@
 'use client';
-
-/**
- * Pagination — terminal-style page selector
- * Props: page (number), pages (number), onChange (fn)
- */
 export default function Pagination({ page, pages, onChange }) {
   if (!pages || pages <= 1) return null;
   return (

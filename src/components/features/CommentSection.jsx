@@ -1,11 +1,9 @@
 'use client';
-
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { createComment, deleteComment } from '@/lib/api';
 import { useComments } from '@/hooks/useComments';
 import toast from 'react-hot-toast';
-
 function timeAgo(date) {
   const s = Math.floor((Date.now() - new Date(date)) / 1000);
   if (s < 60)    return 'now';
@@ -13,12 +11,10 @@ function timeAgo(date) {
   if (s < 86400) return `${Math.floor(s / 3600)}h`;
   return `${Math.floor(s / 86400)}d`;
 }
-
 export default function CommentSection({ targetType, targetId }) {
   const { user } = useAuth();
   const { comments, loading, addComment, removeComment } = useComments(targetType, targetId);
   const [content, setContent] = useState('');
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!content.trim()) return;
@@ -31,7 +27,6 @@ export default function CommentSection({ targetType, targetId }) {
       toast.error(err.response?.data?.message || 'ERR: Failed');
     }
   };
-
   const handleDelete = async (id) => {
     try {
       await deleteComment(id);
@@ -41,13 +36,11 @@ export default function CommentSection({ targetType, targetId }) {
       toast.error('ERR: Failed');
     }
   };
-
   return (
     <div className="mt-10">
       <div className="text-sm text-[#005a14] mb-5 border-b border-[#003d10] pb-3">
         <span className="text-[#00ff41]">{'/* COMMENTS ('}{comments.length}{') */'}</span>
       </div>
-
       {user && (
         <form onSubmit={handleSubmit} className="mb-8">
           <div className="border border-[#003d10] focus-within:border-[#00ff41] transition-all">
@@ -71,7 +64,6 @@ export default function CommentSection({ targetType, targetId }) {
           </button>
         </form>
       )}
-
       {loading ? (
         <div className="space-y-3">
           {[1, 2, 3].map((i) => (

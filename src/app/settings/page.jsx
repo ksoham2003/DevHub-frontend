@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -7,7 +6,6 @@ import { updateProfile } from '@/lib/api';
 import toast from 'react-hot-toast';
 import TerminalBox from '@/components/ui/TerminalBox';
 import TagInput from '@/components/ui/TagInput';
-
 export default function SettingsPage() {
   const { user, updateUser } = useAuth();
   const router               = useRouter();
@@ -17,7 +15,6 @@ export default function SettingsPage() {
     avatar: '', banner: '', skills: [],
     socialLinks: { github: '', linkedin: '', twitter: '', website: '' },
   });
-
   useEffect(() => {
     if (!user) { router.push('/login'); return; }
     setForm({
@@ -31,7 +28,6 @@ export default function SettingsPage() {
       },
     });
   }, [user]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -46,12 +42,9 @@ export default function SettingsPage() {
       setLoading(false);
     }
   };
-
   const addSkill    = (s) => setForm({ ...form, skills: [...form.skills, s] });
   const removeSkill = (s) => setForm({ ...form, skills: form.skills.filter((x) => x !== s) });
-
   if (!user) return null;
-
   return (
     <div className="pb-12 px-6">
       <div className="max-w-3xl mx-auto fade-in">
@@ -60,7 +53,6 @@ export default function SettingsPage() {
             <span className="text-[#00ff41]">root@devhub</span>:~$ cd ..
           </button>
         </div>
-
         <TerminalBox title={`usermod ${user.username} --edit-profile`}>
           <div className="p-10">
             <h1 className="text-xl font-bold text-[#00ff41] mb-6">{'>'} EDIT PROFILE</h1>
@@ -93,9 +85,7 @@ export default function SettingsPage() {
                   <input type="url" value={form.banner} onChange={(e) => setForm({ ...form, banner: e.target.value })} className="w-full" />
                 </div>
               </div>
-
               <TagInput label="SKILLS" tags={form.skills} onAdd={addSkill} onRemove={removeSkill} placeholder="e.g. React" />
-
               <div className="border-t border-[#003d10] pt-5">
                 <div className="text-sm text-[#005a14] mb-4">{'/* SOCIAL LINKS */'}</div>
                 <div className="space-y-4">
@@ -109,7 +99,6 @@ export default function SettingsPage() {
                   ))}
                 </div>
               </div>
-
               <button type="submit" disabled={loading} className="w-full py-3 border border-[#00ff41] text-[#00ff41] text-sm font-bold hover:bg-[#00ff41] hover:text-black transition-all disabled:opacity-30">
                 {loading ? '> SAVING...' : '> WRITE --save'}
               </button>

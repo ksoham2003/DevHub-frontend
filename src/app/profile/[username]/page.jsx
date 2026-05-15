@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
@@ -10,14 +9,12 @@ import ProjectCard from '@/components/cards/ProjectCard';
 import BlogCard from '@/components/cards/BlogCard';
 import TerminalBox from '@/components/ui/TerminalBox';
 import toast from 'react-hot-toast';
-
 export default function ProfilePage() {
   const { username }                 = useParams();
   const { user: currentUser }        = useAuth();
   const { profile, projects, blogs, isFollowing, updateFollowCount, loading } = useProfile(username);
   const [tab, setTab]                = useState('projects');
   const isOwner = currentUser?.username === username;
-
   const handleFollow = async () => {
     if (!currentUser) { toast.error('ERR: Login required'); return; }
     try {
@@ -26,7 +23,6 @@ export default function ProfilePage() {
       toast.success(res.data.message);
     } catch { toast.error('ERR: Failed'); }
   };
-
   if (loading) return (
     <div className="min-h-screen flex items-center justify-center">
       <span className="text-sm text-[#003d10] cursor-blink">loading profile</span>
@@ -35,14 +31,12 @@ export default function ProfilePage() {
   if (!profile) return (
     <div className="min-h-screen text-center py-20 text-sm text-[#003d10]">ERR: User not found</div>
   );
-
   const socials = [
     { key: 'github',   url: profile.socialLinks?.github   },
     { key: 'linkedin', url: profile.socialLinks?.linkedin },
     { key: 'twitter',  url: profile.socialLinks?.twitter  },
     { key: 'website',  url: profile.socialLinks?.website  },
   ].filter((l) => l.url);
-
   return (
     <div className="pb-12 px-6 fade-in">
       <div className="max-w-5xl mx-auto">
@@ -71,13 +65,11 @@ export default function ProfilePage() {
                   }
                 </div>
               </div>
-
               <div className="mt-5 flex flex-wrap items-center gap-6 text-sm text-[#005a14]">
                 {profile.location && <span>location: {profile.location}</span>}
                 <span>followers: <span className="text-[#00ff41]">{profile.followersCount || 0}</span></span>
                 <span>following: <span className="text-[#00ff41]">{profile.followingCount || 0}</span></span>
               </div>
-
               {socials.length > 0 && (
                 <div className="flex gap-3 mt-4">
                   {socials.map((l) => (
@@ -97,8 +89,6 @@ export default function ProfilePage() {
             </div>
           </TerminalBox>
         </div>
-
-        {/* Tabs */}
         <div className="flex gap-0 mt-8 border-b border-[#003d10]">
           {[
             { key: 'projects', label: `ls projects (${projects.length})` },
@@ -110,7 +100,6 @@ export default function ProfilePage() {
             </button>
           ))}
         </div>
-
         <div className="mt-6">
           {tab === 'projects' && (
             projects.length === 0

@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap');
-
 @import "tailwindcss";
-
 @theme {
   --color-primary: #00ff41;
   --color-primary-light: #33ff66;
@@ -20,19 +18,16 @@
   --color-danger: #ff0040;
   --font-family-sans: 'Fira Code', 'Courier New', 'Lucida Console', monospace;
 }
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 html {
   scrollbar-width: thin;
   scrollbar-color: #00ff41 #000;
   font-size: 16px;
 }
-
 body {
   font-family: var(--font-family-sans);
   background-color: #000000;
@@ -43,9 +38,8 @@ body {
   font-size: 14px;
   line-height: 1.6;
   letter-spacing: 0.01em;
+  padding-bottom: 4rem; 
 }
-
-/* CRT scanlines */
 body::after {
   content: '';
   position: fixed;
@@ -60,8 +54,6 @@ body::after {
     rgba(0, 0, 0, 0.1) 4px
   );
 }
-
-/* CRT vignette */
 body::before {
   content: '';
   position: fixed;
@@ -70,26 +62,18 @@ body::before {
   z-index: 9998;
   background: radial-gradient(ellipse at center, transparent 65%, rgba(0,0,0,0.35) 100%);
 }
-
-/* Phosphor glow */
 h1, h2, h3, h4, h5, h6 {
   text-shadow: 0 0 5px rgba(0, 255, 65, 0.5), 0 0 15px rgba(0, 255, 65, 0.15);
   font-weight: 700;
 }
-
-/* Scrollbar */
 ::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: #000; }
 ::-webkit-scrollbar-thumb { background: #003d10; border: 1px solid #00ff41; }
 ::-webkit-scrollbar-thumb:hover { background: #005a14; }
-
-/* Selection */
 ::selection {
   background: #00ff41;
   color: #000;
 }
-
-/* Terminal box */
 .glass {
   background: #000;
   border: 1px solid #003d10;
@@ -99,8 +83,6 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #00ff41;
   box-shadow: 0 0 8px rgba(0,255,65,0.12);
 }
-
-/* Gradient text override */
 .gradient-text {
   background: none !important;
   -webkit-background-clip: unset !important;
@@ -108,13 +90,9 @@ h1, h2, h3, h4, h5, h6 {
   background-clip: unset !important;
   color: #00ff41 !important;
 }
-
-/* Glow */
 .glow-primary {
   box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
 }
-
-/* Border override */
 .gradient-border {
   background: #000;
   border-radius: 0;
@@ -122,8 +100,6 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 0 10px rgba(0,255,65,0.12);
 }
 .gradient-border::before { display: none; }
-
-/* Skeleton */
 .skeleton {
   background: #000;
   border: 1px solid #003d10;
@@ -142,8 +118,6 @@ h1, h2, h3, h4, h5, h6 {
   color: #003d10;
   animation: blink 1s step-end infinite;
 }
-
-/* Fade in */
 .fade-in {
   animation: termFade 0.15s steps(3) forwards;
 }
@@ -152,8 +126,6 @@ h1, h2, h3, h4, h5, h6 {
   50% { opacity: 0.5; }
   100% { opacity: 1; }
 }
-
-/* Blink */
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
@@ -164,8 +136,6 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 2px;
   color: #00ff41;
 }
-
-/* Tag */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -183,8 +153,6 @@ h1, h2, h3, h4, h5, h6 {
   border-color: #00ff41;
   color: #00ff41;
 }
-
-/* Markdown */
 .markdown-content h1 { font-size: 1.4rem; font-weight: 700; margin: 1.5rem 0 0.75rem; color: #00ff41; }
 .markdown-content h1::before { content: '# '; color: #005a14; }
 .markdown-content h2 { font-size: 1.2rem; font-weight: 700; margin: 1.25rem 0 0.5rem; color: #00ff41; }
@@ -201,13 +169,10 @@ h1, h2, h3, h4, h5, h6 {
 .markdown-content blockquote { border-left: 2px solid #00ff41; padding-left: 1rem; margin: 1rem 0; color: #005a14; }
 .markdown-content a { color: #00ff41; text-decoration: underline; }
 .markdown-content img { max-width: 100%; border: 1px solid #003d10; margin: 1rem 0; }
-
-/* Form overrides */
 input, textarea, select, button {
   border-radius: 0 !important;
   font-family: var(--font-family-sans) !important;
 }
-
 input, textarea, select {
   background: #000 !important;
   color: #00ff41 !important;
@@ -216,23 +181,19 @@ input, textarea, select {
   caret-color: #00ff41;
   padding: 12px 16px !important;
 }
-
 input:focus, textarea:focus, select:focus {
   border-color: #00ff41 !important;
   box-shadow: 0 0 5px rgba(0, 255, 65, 0.15) !important;
   outline: none !important;
 }
-
 input::placeholder, textarea::placeholder {
   color: #003d10 !important;
   font-style: normal;
 }
-
 select option {
   background: #000;
   color: #00ff41;
 }
-
 input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
@@ -257,13 +218,9 @@ input[type="checkbox"]:checked::after {
   font-size: 11px;
   font-weight: 700;
 }
-
-/* Remove all rounded corners */
 [class*="rounded"] {
   border-radius: 0 !important;
 }
-
-/* Global link style */
 a {
   color: #00ff41;
   text-decoration: none;

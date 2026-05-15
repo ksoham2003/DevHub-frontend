@@ -1,9 +1,4 @@
 'use client';
-
-/**
- * TerminalPrompt — renders a shell prompt line
- * Props: user (string), path (string), command (string)
- */
 export default function TerminalPrompt({ user = 'root@devhub', path = '~', command }) {
   return (
     <div className="text-sm text-[#005a14] mb-3">
