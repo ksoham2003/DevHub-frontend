@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -7,20 +6,17 @@ import { useAuth } from '@/context/AuthContext';
 import { registerUser } from '@/lib/api';
 import toast from 'react-hot-toast';
 import TerminalBox from '@/components/ui/TerminalBox';
-
 const FIELDS = [
   { name: 'name',     label: 'FULL_NAME', type: 'text',  placeholder: 'John Doe'        },
   { name: 'username', label: 'USERNAME',  type: 'text',  placeholder: 'johndoe'         },
   { name: 'email',    label: 'EMAIL',     type: 'email', placeholder: 'user@domain.com' },
 ];
-
 export default function RegisterPage() {
   const { login }  = useAuth();
   const router     = useRouter();
   const [form,    setForm]    = useState({ name: '', username: '', email: '', password: '' });
   const [showPw,  setShowPw]  = useState(false);
   const [loading, setLoading] = useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (form.password.length < 6) { toast.error('ERR: Password must be >= 6 chars'); return; }
@@ -36,7 +32,6 @@ export default function RegisterPage() {
       setLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center px-6 py-8">
       <div className="w-full max-w-lg fade-in">

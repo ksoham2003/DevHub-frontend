@@ -1,5 +1,4 @@
 'use client';
-
 import { useDevelopers } from '@/hooks/useDevelopers';
 import DeveloperCard from '@/components/cards/DeveloperCard';
 import LoadingGrid from '@/components/ui/LoadingGrid';
@@ -7,12 +6,9 @@ import Pagination from '@/components/ui/Pagination';
 import EmptyState from '@/components/ui/EmptyState';
 import TerminalPrompt from '@/components/ui/TerminalPrompt';
 import FilterChips from '@/components/ui/FilterChips';
-
 const SKILLS = ['React','Node.js','Python','TypeScript','Next.js','MongoDB','PostgreSQL','Vue.js','Angular','Django','Go','Rust','Docker','AWS'];
-
 export default function DevelopersPage() {
   const { devs, pagination, loading, page, setPage, skillFilter, toggleSkill } = useDevelopers();
-
   return (
     <div className="pb-12 px-6">
       <div className="max-w-6xl mx-auto">
@@ -20,11 +16,9 @@ export default function DevelopersPage() {
           <TerminalPrompt command="who --list" />
           <h1 className="text-2xl font-bold text-[#00ff41]">/developers</h1>
         </div>
-
         <div className="mb-8">
           <FilterChips options={SKILLS} active={skillFilter} onToggle={toggleSkill} />
         </div>
-
         {loading ? (
           <LoadingGrid count={12} cols={6} height="h-44" />
         ) : devs.length === 0 ? (

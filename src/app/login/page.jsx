@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -7,14 +6,12 @@ import { useAuth } from '@/context/AuthContext';
 import { loginUser } from '@/lib/api';
 import toast from 'react-hot-toast';
 import TerminalBox from '@/components/ui/TerminalBox';
-
 export default function LoginPage() {
   const { login }  = useAuth();
   const router     = useRouter();
   const [form,    setForm]   = useState({ email: '', password: '' });
   const [showPw,  setShowPw] = useState(false);
   const [loading, setLoading]= useState(false);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -29,7 +26,6 @@ export default function LoginPage() {
       setLoading(false);
     }
   };
-
   return (
     <div className="min-h-screen flex items-center justify-center px-6">
       <div className="w-full max-w-lg fade-in">

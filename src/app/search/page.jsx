@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import { useSearch } from '@/hooks/useSearch';
@@ -8,32 +7,26 @@ import BlogCard from '@/components/cards/BlogCard';
 import DeveloperCard from '@/components/cards/DeveloperCard';
 import TerminalPrompt from '@/components/ui/TerminalPrompt';
 import LoadingGrid from '@/components/ui/LoadingGrid';
-
 function SearchContent() {
   const searchParams         = useSearchParams();
   const router               = useRouter();
   const { results, loading, type, setType, total, doSearch } = useSearch();
   const [query, setQuery]    = useState(searchParams.get('q') || '');
-
   useEffect(() => {
     const q = searchParams.get('q');
     if (q) { setQuery(q); doSearch(q, type); }
   }, [searchParams, type]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (query.trim()) router.push(`/search?q=${encodeURIComponent(query.trim())}`);
   };
-
   const q = searchParams.get('q');
-
   return (
     <div className="pb-12 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="py-6">
           <TerminalPrompt command={`grep -r '${q || '...'}' --recursive`} />
           <h1 className="text-2xl font-bold text-[#00ff41] mb-5">/search</h1>
-
           <form onSubmit={handleSubmit}>
             <div className="relative max-w-2xl">
               <span className="absolute left-4 top-1/2 -translate-y-1/2 text-[#005a14] text-sm font-bold">$</span>
@@ -47,8 +40,6 @@ function SearchContent() {
             </div>
           </form>
         </div>
-
-        {/* Type filter */}
         <div className="flex gap-2 mb-8">
           {['all','projects','blogs','users'].map((t) => (
             <button key={t} onClick={() => setType(t)}
@@ -57,7 +48,6 @@ function SearchContent() {
             </button>
           ))}
         </div>
-
         {loading ? (
           <LoadingGrid count={6} cols={3} height="h-36" />
         ) : q && total === 0 ? (
@@ -97,7 +87,6 @@ function SearchContent() {
     </div>
   );
 }
-
 export default function SearchPage() {
   return (
     <Suspense fallback={

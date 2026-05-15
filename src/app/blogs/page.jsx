@@ -1,5 +1,4 @@
 'use client';
-
 import { useBlogs } from '@/hooks/useBlogs';
 import BlogCard from '@/components/cards/BlogCard';
 import LoadingGrid from '@/components/ui/LoadingGrid';
@@ -7,12 +6,9 @@ import Pagination from '@/components/ui/Pagination';
 import EmptyState from '@/components/ui/EmptyState';
 import TerminalPrompt from '@/components/ui/TerminalPrompt';
 import FilterChips from '@/components/ui/FilterChips';
-
 const CATEGORIES = ['All','Tutorial','Guide','Opinion','News','Project Update','Career','Other'];
-
 export default function BlogsPage() {
   const { blogs, pagination, loading, page, setPage, sort, changeSort, category, changeCategory } = useBlogs();
-
   return (
     <div className="pb-12 px-6">
       <div className="max-w-6xl mx-auto">
@@ -26,7 +22,6 @@ export default function BlogsPage() {
             </select>
           </div>
         </div>
-
         <div className="mb-8">
           <FilterChips
             options={CATEGORIES}
@@ -35,7 +30,6 @@ export default function BlogsPage() {
             single
           />
         </div>
-
         {loading ? (
           <LoadingGrid count={6} cols={3} height="h-48" />
         ) : blogs.length === 0 ? (

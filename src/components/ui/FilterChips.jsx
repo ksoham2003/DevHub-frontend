@@ -1,13 +1,7 @@
 'use client';
-
-/**
- * FilterChips — a row of toggleable filter buttons
- * Props: options (string[]), active (string[]), onToggle, single (bool — single select mode)
- */
 export default function FilterChips({ options, active = [], onToggle, single = false }) {
   const isActive = (opt) =>
     single ? active === opt : active.includes(opt);
-
   return (
     <div className="flex flex-wrap gap-2">
       {options.map((opt) => (

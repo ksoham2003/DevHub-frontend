@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { useProjects } from '@/hooks/useProjects';
@@ -9,9 +8,7 @@ import Pagination from '@/components/ui/Pagination';
 import EmptyState from '@/components/ui/EmptyState';
 import TerminalPrompt from '@/components/ui/TerminalPrompt';
 import FilterChips from '@/components/ui/FilterChips';
-
 const TECH_OPTIONS = ['React','Node.js','Python','TypeScript','Next.js','MongoDB','PostgreSQL','TailwindCSS','Express','Vue.js','Angular','Django','Flask','Go','Rust','Docker'];
-
 export default function ProjectsPage() {
   const [showFilters, setShowFilters] = useState(false);
   const {
@@ -20,7 +17,6 @@ export default function ProjectsPage() {
     sort, changeSort,
     techFilter, toggleTech, clearTech,
   } = useProjects();
-
   return (
     <div className="pb-12 px-6">
       <div className="max-w-6xl mx-auto">
@@ -42,7 +38,6 @@ export default function ProjectsPage() {
             </div>
           </div>
         </div>
-
         {showFilters && (
           <div className="border border-[#003d10] p-5 mb-6 fade-in">
             <p className="text-sm text-[#005a14] mb-3">$ grep --tech-stack:</p>
@@ -52,7 +47,6 @@ export default function ProjectsPage() {
             )}
           </div>
         )}
-
         {loading ? (
           <LoadingGrid count={6} cols={3} height="h-52" />
         ) : projects.length === 0 ? (

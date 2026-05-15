@@ -1,5 +1,4 @@
 'use client';
-
 import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
@@ -7,8 +6,6 @@ import { createProject, updateProject, getProject } from '@/lib/api';
 import toast from 'react-hot-toast';
 import TerminalBox from '@/components/ui/TerminalBox';
 import TagInput from '@/components/ui/TagInput';
-
-// Shared component — editId=null for new, editId=string for edit
 export function ProjectFormView({ editId }) {
   const router  = useRouter();
   const { user }= useAuth();
@@ -17,7 +14,6 @@ export function ProjectFormView({ editId }) {
   const [form, setForm] = useState({
     title: '', description: '', techStack: [], githubUrl: '', liveUrl: '', thumbnail: '',
   });
-
   useEffect(() => {
     if (!user) { router.push('/login'); return; }
     if (isEdit) {
@@ -29,7 +25,6 @@ export function ProjectFormView({ editId }) {
         .catch(() => router.push('/projects'));
     }
   }, [editId, user]);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -49,10 +44,8 @@ export function ProjectFormView({ editId }) {
       setLoading(false);
     }
   };
-
   const addTech    = (t) => setForm({ ...form, techStack: [...form.techStack, t] });
   const removeTech = (t) => setForm({ ...form, techStack: form.techStack.filter((x) => x !== t) });
-
   return (
     <div className="pb-12 px-6">
       <div className="max-w-3xl mx-auto fade-in">
@@ -61,7 +54,6 @@ export function ProjectFormView({ editId }) {
             <span className="text-[#00ff41]">root@devhub</span>:~$ cd ..
           </button>
         </div>
-
         <TerminalBox title={isEdit ? 'vim project --edit' : 'mkdir project --new'}>
           <div className="p-10">
             <h1 className="text-xl font-bold text-[#00ff41] mb-6">{isEdit ? '> EDIT PROJECT' : '> NEW PROJECT'}</h1>
@@ -74,9 +66,7 @@ export function ProjectFormView({ editId }) {
                 <label className="block text-sm text-[#005a14] mb-2">{'>'} DESCRIPTION:</label>
                 <textarea required value={form.description} onChange={(e) => setForm({ ...form, description: e.target.value })} rows={6} placeholder="describe your project..." className="w-full resize-none" />
               </div>
-
               <TagInput label="TECH_STACK" tags={form.techStack} onAdd={addTech} onRemove={removeTech} placeholder="e.g. React" />
-
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm text-[#005a14] mb-2">{'>'} GITHUB_URL:</label>
@@ -91,7 +81,6 @@ export function ProjectFormView({ editId }) {
                 <label className="block text-sm text-[#005a14] mb-2">{'>'} THUMBNAIL_URL:</label>
                 <input type="url" value={form.thumbnail} onChange={(e) => setForm({ ...form, thumbnail: e.target.value })} placeholder="https://..." className="w-full" />
               </div>
-
               <button type="submit" disabled={loading}
                 className="w-full py-3 border border-[#00ff41] text-[#00ff41] text-sm font-bold hover:bg-[#00ff41] hover:text-black transition-all disabled:opacity-30">
                 {loading ? '> SAVING...' : isEdit ? '> WRITE --save' : '> MKDIR --create'}
@@ -103,8 +92,6 @@ export function ProjectFormView({ editId }) {
     </div>
   );
 }
-
-// /projects/new
 export default function ProjectNewPage() {
   return <ProjectFormView editId={null} />;
 }

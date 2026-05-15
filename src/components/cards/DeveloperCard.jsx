@@ -1,7 +1,5 @@
 'use client';
-
 import Link from 'next/link';
-
 export default function DeveloperCard({ user: dev }) {
   return (
     <div className="border border-[#003d10] hover:border-[#00ff41] transition-all fade-in bg-black p-6">

@@ -1,10 +1,8 @@
 'use client';
-
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter, usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-
 export default function Navbar() {
   const { user, logout } = useAuth();
   const router           = useRouter();
@@ -12,7 +10,6 @@ export default function Navbar() {
   const [mobileOpen,   setMobileOpen]   = useState(false);
   const [searchQuery,  setSearchQuery]  = useState('');
   const [dropdownOpen, setDropdownOpen] = useState(false);
-
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchQuery.trim()) {
@@ -21,29 +18,23 @@ export default function Navbar() {
       setMobileOpen(false);
     }
   };
-
   const navLinks = [
     { to: '/',          label: '~/'        },
     { to: '/projects',  label: '/projects' },
     { to: '/blogs',     label: '/blogs'    },
     { to: '/developers',label: '/devs'     },
   ];
-
   const isActive = (path) => pathname === path;
-
   return (
     <nav className="fixed bottom-0 left-0 right-0 z-50 bg-black border-t border-[#003d10]">
       <div className="w-full px-6 flex flex-col-reverse">
         <div className="flex items-center justify-between h-12">
-          {/* Logo */}
           <Link href="/" className="flex items-center gap-2 shrink-0">
             <span className="text-[#00ff41] font-bold text-sm tracking-wider">
               <span className="text-[#005a14]">┌─[</span>DevHub<span className="text-[#005a14]">]</span>
             </span>
             <span className="text-[#003d10] text-xs hidden sm:inline">v2.0.0</span>
           </Link>
-
-          {/* Desktop Search */}
           <form onSubmit={handleSearch} className="hidden md:flex items-center flex-1 max-w-md mx-8">
             <div className="relative w-full">
               <span className="absolute left-3 top-1/2 -translate-y-1/2 text-[#005a14] text-sm font-bold">$</span>
@@ -56,8 +47,6 @@ export default function Navbar() {
               />
             </div>
           </form>
-
-          {/* Desktop Nav */}
           <div className="hidden md:flex items-center gap-4 shrink-0">
             {navLinks.map((link) => (
               <Link
@@ -73,12 +62,9 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-
             <span className="text-[#003d10] mx-2">│</span>
-
             {user ? (
               <div className="flex items-center gap-2">
-                {/* + New dropdown */}
                 <div className="relative">
                   <button
                     onClick={() => setDropdownOpen(!dropdownOpen)}
@@ -106,14 +92,12 @@ export default function Navbar() {
                     </div>
                   )}
                 </div>
-
                 <Link
                   href={`/profile/${user.username}`}
                   className="text-sm text-[#005a14] hover:text-[#00ff41] transition-all px-2"
                 >
                   {user.username}@devhub
                 </Link>
-
                 <button
                   onClick={() => { logout(); router.push('/'); }}
                   className="px-2 py-1 text-sm text-[#003d10] hover:text-[#ff0040] transition-all"
@@ -129,8 +113,6 @@ export default function Navbar() {
               </div>
             )}
           </div>
-
-          {/* Mobile menu button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="md:hidden text-[#00ff41] text-sm"
@@ -138,8 +120,6 @@ export default function Navbar() {
             {mobileOpen ? '[^C]' : '[≡]'}
           </button>
         </div>
-
-        {/* Mobile menu */}
         {mobileOpen && (
           <div className="md:hidden pb-3 border-b border-[#003d10] pt-3 fade-in mb-2">
             <form onSubmit={handleSearch} className="mb-3">
